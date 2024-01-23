@@ -21,8 +21,8 @@ async def fetch(url, retries=5):
 
 async def main():
 	current_year = datetime.now().year
-	current_month = datetime.now().month	
-	years = [f"{current_year}{current_month}", 200608, 201908, 200008]
+	current_month = '{:02d}'.format(datetime.now().month)
+	years = [f'{current_year}{current_month}', 200608, 201908, 200008]
 	urls = [f"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/all/{year}?field_tdr_date_value_month={year}&type=daily_treasury_yield_curve&page&_format=csv" for year in years]
 	tasks = [fetch(url) for url in urls]
 	responses = await asyncio.gather(*tasks)
